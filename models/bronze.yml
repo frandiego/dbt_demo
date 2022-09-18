@@ -1,0 +1,104 @@
+version: 2
+
+sources:
+  - name: instacart_bronze
+    database: elegant-tendril-362907
+    loader: gcloud storage
+    tables:
+
+      - name: department
+        description: "Information of the Department"
+        external:
+          location: 'gs://demo_dbt/instacart/departments/*.csv'
+          options:
+            format: csv
+            skip_leading_rows: 1
+        columns:
+          - name: id
+            data_type: INTEGER
+            description: "Department ID"
+          - name: name
+            data_type: STRING
+            description: "Department Name"
+
+      - name: aisle
+        description: "Passages between cabinets and shelves of goods in the supermarket"
+        external:
+          location: 'gs://demo_dbt/instacart/aisles/*.csv'
+          options:
+            format: csv
+            skip_leading_rows: 1
+        columns:
+          - name: id
+            data_type: INTEGER
+            description: "Aisle ID"
+          - name: name
+            data_type: STRING
+            description: "Aisle Name"
+
+      - name: product
+        description: "Information of the Products and its location"
+        external:
+          location: 'gs://demo_dbt/instacart/products/*.csv'
+          options:
+            format: csv
+            skip_leading_rows: 1
+        columns:
+          - name: id
+            data_type: INTEGER
+            description: "Product ID"
+          - name: name
+            data_type: STRING
+            description: "Product Name"
+          - name: aisle_id
+            data_type: INTEGER
+            description: "Aisle ID"
+          - name: department_id
+            data_type: INTEGER
+            description: "Department ID"
+
+
+      - name: order
+        description: "Order is the ticket with the information of the product bought"
+        external:
+          location: 'gs://demo_dbt/instacart/orders/*.csv'
+          options:
+            format: csv
+            skip_leading_rows: 1
+        columns:
+          - name: id
+            data_type: INTEGER
+            description: "Order ID"
+          - name: user_id
+            data_type: INTEGER
+            description: "User ID"
+          - name: number
+            data_type: INTEGER
+            description: "Order Number"
+          - name: dow
+            data_type: INTEGER
+            description: "Day of Week"
+          - name: hour
+            data_type: INTEGER
+            description: "Hour of the Day (24h)"
+
+      - name: order_product
+        description: "Information of the Link Between Order and Product (Ticket)"
+        external:
+          location: 'gs://demo_dbt/instacart/order_products/*.csv'
+          options:
+            format: csv
+            skip_leading_rows: 1
+        columns:
+          - name: order_id
+            data_type: INTEGER
+            description: "Order ID"
+          - name: product_id
+            data_type: INTEGER
+            description: "Product ID"
+          - name: add_to_cart_order
+            data_type: INTEGER
+            description: "Order in the Cart"
+          - name: reordered
+            data_type: INTEGER
+            description: "If has been reordered in the cart"
