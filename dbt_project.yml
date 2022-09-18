@@ -1,0 +1,9 @@
+# ======
+# Project Details
+# ======
+name: 'gitlab_snowflake'
+version: '1.0'
+config-version: 2
+profile: 'gitlab-snowflake'
+require-dbt-version: 1.1.0
+
