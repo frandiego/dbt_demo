@@ -1,0 +1,15 @@
+config:
+
+  partial_parse: true
+dbt_demo:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      keyfile: service_account_elegant-tendril.json
+      project: elegant-tendril-362907
+      dataset: instacart
+      threads: 2
+
+      

@@ -2,3 +2,6 @@ target/
 dbt_packages/
 dbt_modules/
 logs/
+service_account_elegant-tendril.json
+.user.yml
+
