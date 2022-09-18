@@ -17,3 +17,11 @@ silver:
 
 golden: 
 	dbt run --profiles-dir=$(DBT_PROFILES_DIR) --select golden
+
+
+docs-generate:
+	dbt docs generate --profiles-dir=$(DBT_PROFILES_DIR)
+
+
+docs:  docs-generate
+	dbt docs serve --profiles-dir=$(DBT_PROFILES_DIR)
