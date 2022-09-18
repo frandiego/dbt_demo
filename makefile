@@ -7,9 +7,13 @@ install:
 	pip install markupsafe==2.0.1
 
 
-external:
+bronze:
 	dbt run-operation --profiles-dir=$(DBT_PROFILES_DIR) stage_external_sources
 
 
-run: external
-	dbt run --profiles-dir=$(DBT_PROFILES_DIR)
+silver: 
+	dbt run --profiles-dir=$(DBT_PROFILES_DIR) --select silver
+
+
+golden: 
+	dbt run --profiles-dir=$(DBT_PROFILES_DIR) --select golden
