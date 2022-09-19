@@ -2,7 +2,8 @@
   config(
     materialized='table', 
     dataset='silver',
-    name='processed_files'
+    name='processed_files', 
+    tags=["silver"]
   )
 }}
 

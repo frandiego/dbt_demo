@@ -3,14 +3,15 @@
     materialized='table', 
     dataset='golden',
     name='top_departments', 
-    unique_key="department_id"
+    unique_key="department_id", 
+    tags=["golden"]
   )
 }}
 
 WITH AUX AS (
     SELECT  
           l.department_id, 
-          r.name as aisle_name, 
+          r.name as department_name, 
           sum(l.sales) as sales, 
       FROM {{ ref('top_aisles') }} l
       LEFT JOIN {{ ref('department') }}  r

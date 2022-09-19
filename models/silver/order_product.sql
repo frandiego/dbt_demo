@@ -3,7 +3,8 @@
     materialized='table', 
     dataset='silver',
     name='order_product', 
-    unique_key=['product_id', 'order_id']
+    unique_key=['product_id', 'order_id'], 
+    tags=["silver"]
   )
 }}
 

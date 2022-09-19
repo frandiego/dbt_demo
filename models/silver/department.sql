@@ -3,7 +3,8 @@
     materialized='table',  
     dataset='silver',
     name='department', 
-    unique_key="id"
+    unique_key="id", 
+    tags=["silver"]
   )
 }}
 

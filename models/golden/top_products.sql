@@ -3,7 +3,8 @@
     materialized='table', 
     dataset='golden',
     name='top_products', 
-    unique_key="product_id"
+    unique_key="product_id", 
+    tags=["golden"]
   )
 }}
 

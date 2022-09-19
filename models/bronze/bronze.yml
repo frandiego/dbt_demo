@@ -8,6 +8,7 @@ sources:
 
       - name: department
         description: "Information of the Department"
+        tags: ['bronze']
         external:
           location: 'gs://demo_dbt/instacart/departments/*.csv'
           options:
@@ -23,6 +24,7 @@ sources:
 
       - name: aisle
         description: "Passages between cabinets and shelves of goods in the supermarket"
+        tags: ['bronze']
         external:
           location: 'gs://demo_dbt/instacart/aisles/*.csv'
           options:
@@ -38,6 +40,7 @@ sources:
 
       - name: product
         description: "Information of the Products and its location"
+        tags: ['bronze']
         external:
           location: 'gs://demo_dbt/instacart/products/*.csv'
           options:
@@ -60,6 +63,7 @@ sources:
 
       - name: order
         description: "Order is the ticket with the information of the product bought"
+        tags: ['bronze']
         external:
           location: 'gs://demo_dbt/instacart/orders/*.csv'
           options:
@@ -84,6 +88,7 @@ sources:
 
       - name: order_product
         description: "Information of the Link Between Order and Product (Ticket)"
+        tags: ['bronze']
         external:
           location: 'gs://demo_dbt/instacart/order_products/*.csv'
           options:

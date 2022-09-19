@@ -1,0 +1,109 @@
+version: 2
+
+sources:
+  - name: instacart_silver
+    database: elegant-tendril-362907
+    loader: gcloud storage
+    tables:
+
+      - name: top_products
+        description: "Information of Top Products Sold"
+        columns:
+          - name: product_id
+            data_type: INTEGER
+            description: "Product ID"
+            tests:
+              - unique
+              - not_null
+              - relationships:
+                      to: ref('product')
+                      field: id
+          - name: aisle_id
+            data_type: INTEGER
+            description: "Aisle ID"
+            tests:
+              - unique
+              - not_null
+              - relationships:
+                      to: ref('aisle')
+                      field: id  
+          - name: department_id
+            data_type: INTEGER
+            description: "Department ID"
+            tests:
+              - unique
+              - not_null
+              - relationships:
+                      to: ref('department')
+                      field: id               
+          - name: product_name
+            data_type: STRING
+            description: "Name of the Product"
+            tests:
+              - unique
+              - not_null
+          - name: sales
+            data_type: INTEGER
+            description: "Products Sold"
+          - name: rank
+            data_type: INTEGER
+            description: "Rank over sales"
+
+      - name: top_aisles
+        description: "Information of the Top Aisles"
+        columns:
+          - name: aisle_id
+            data_type: INTEGER
+            description: "Aisle ID"
+            tests:
+              - unique
+              - not_null
+              - relationships:
+                      to: ref('top_products')
+                      field: aisle_id  
+          - name: department_id
+            data_type: INTEGER
+            description: "Department ID"
+            tests:
+              - unique
+              - not_null
+              - relationships:
+                      to: ref('top_products')
+                      field: department_id               
+          - name: aisle_name
+            data_type: STRING
+            description: "Name of the Aisle"
+            tests:
+              - unique
+              - not_null
+          - name: sales
+            data_type: INTEGER
+            description: "Products Sold"
+          - name: rank
+            data_type: INTEGER
+            description: "Rank over sales"
+
+      - name: top_departments
+        description: "Information of the Top Departments"
+        columns: 
+          - name: department_id
+            data_type: INTEGER
+            description: "Department ID"
+            tests:
+              - unique
+              - not_null
+              - relationships:
+                      to: ref('top_aisles')
+                      field: department_id               
+          - name: department_name
+            data_type: STRING
+            description: "Name of the Department"
+            tests:
+              - unique
+              - not_null
+          - name: sales
+            data_type: INTEGER
+            description: "Products Sold"
+          - name: rank
+            data_type: INTEGER
+            description: "Rank over sales"

@@ -1,0 +1,170 @@
+version: 2
+
+sources:
+  - name: instacart_silver
+    database: elegant-tendril-362907
+    loader: gcloud storage
+    tables:
+
+      - name: department
+        description: "Information of the Department"
+        tags: ["silver"]
+        columns:
+          - name: id
+            data_type: INTEGER
+            description: "Department ID"
+            tests:
+              - unique
+              - not_null
+          - name: name
+            data_type: STRING
+            description: "Department Name"
+            tests:
+              - unique
+              - not_null
+          - name: file_name
+            data_type: STRING
+            description: "Source Origin File"
+          - name: load_time
+            data_type: TIMESTAMP
+            description: "Timestamp of Load"
+
+      - name: aisle
+        description: "Passages between cabinets and shelves of goods in the supermarket"
+        tags: ["silver"]
+        columns:
+          - name: id
+            data_type: INTEGER
+            description: "Aisle ID"
+            tests:
+              - unique
+              - not_null
+          - name: name
+            data_type: STRING
+            description: "Aisle Name"
+            tests:
+              - unique
+              - not_null
+          - name: file_name
+            data_type: STRING
+            description: "Source Origin File"
+          - name: load_time
+            data_type: TIMESTAMP
+            description: "Timestamp of Load"
+
+      - name: product
+        description: "Information of the Products and its location"
+        tags: ["silver"]
+        columns:
+          - name: id
+            data_type: INTEGER
+            description: "Product ID"
+            tests:
+              - unique
+              - not_null
+          - name: name
+            data_type: STRING
+            description: "Product Name"
+            tests:
+              - unique
+              - not_null
+          - name: aisle_id
+            data_type: INTEGER
+            description: "Aisle ID"
+            tests:
+              - relationships:
+                      to: ref('aisle')
+                      field: id
+          - name: department_id
+            data_type: INTEGER
+            description: "Department ID"
+            tests:
+              - relationships:
+                      to: ref('department')
+                      field: id
+          - name: file_name
+            data_type: STRING
+            description: "Source Origin File"
+          - name: load_time
+            data_type: TIMESTAMP
+            description: "Timestamp of Load"
+
+
+      - name: order
+        description: "Order is the ticket with the information of the product bought"
+        tags: ["silver"]
+        columns:
+          - name: id
+            data_type: INTEGER
+            description: "Order ID"
+            tests:
+              - unique
+              - not_null
+          - name: user_id
+            data_type: INTEGER
+            description: "User ID"
+          - name: number
+            data_type: INTEGER
+            description: "Order Number"
+          - name: dow
+            data_type: INTEGER
+            description: "Day of Week"
+            tests:
+              - accepted_values:
+                  values: [0,1,2,3,4,5,6]
+                  quote: false
+          - name: hour
+            data_type: INTEGER
+            description: "Hour of the Day (24h)"
+            tests:
+              - accepted_values:
+                  values: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+                  quote: false
+          - name: file_name
+            data_type: STRING
+            description: "Source Origin File"
+          - name: load_time
+            data_type: TIMESTAMP
+            description: "Timestamp of Load"
+
+      - name: order_product
+        description: "Information of the Link Between Order and Product (Ticket)"
+        tags: ["silver"]
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns:
+                - order_id
+                - product_id
+        columns:
+          - name: order_id
+            data_type: INTEGER
+            description: "Order ID"
+            tests:
+              - not_null
+              - relationships:
+                  to: ref('order')
+                  field: id
+          - name: product_id
+            data_type: INTEGER
+            description: "Product ID"
+            tests:
+              - not_null
+              - relationships:
+                      to: ref('product')
+                      field: id
+          - name: add_to_cart_order
+            data_type: INTEGER
+            description: "Order in the Cart"
+          - name: reordered
+            data_type: INTEGER
+            description: "If has been reordered in the cart"
+            tests:
+              - accepted_values:
+                  values: [0,1]
+                  quote: false
+          - name: file_name
+            data_type: STRING
+            description: "Source Origin File"
+          - name: load_time
+            data_type: TIMESTAMP
+            description: "Timestamp of Load"
