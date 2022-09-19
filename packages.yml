@@ -3,5 +3,3 @@ packages:
     version: 0.9.1
   - package: dbt-labs/dbt_external_tables
     version: 0.8.0
-  - package: elementary-data/elementary
-    version: 0.4.11

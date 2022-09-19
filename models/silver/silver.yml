@@ -1,7 +1,8 @@
 version: 2
 
 sources:
-  - name: instacart_silver
+  - name: silver
+    schema: instacart_silver
     database: elegant-tendril-362907
     loader: gcloud storage
     tables:

@@ -31,5 +31,3 @@ models:
     +schema: 'silver'
   golden:
     +schema: 'golden'
-  elementary:
-    +schema: 'elementary'

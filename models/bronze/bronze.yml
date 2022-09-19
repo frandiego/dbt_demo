@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: bronze
     database: elegant-tendril-362907
-    schema: instacart
+    schema: instacart_bronze
     loader: gcloud storage
     tables:
 
