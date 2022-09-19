@@ -1,13 +1,14 @@
 version: 2
 
 sources:
-  - name: instacart_silver
+  - name: instacart_golden
     database: elegant-tendril-362907
     loader: gcloud storage
     tables:
 
       - name: top_products
         description: "Information of Top Products Sold"
+        tags: ["golden"]
         columns:
           - name: product_id
             data_type: INTEGER
@@ -51,6 +52,7 @@ sources:
 
       - name: top_aisles
         description: "Information of the Top Aisles"
+        tags: ["golden"]
         columns:
           - name: aisle_id
             data_type: INTEGER
@@ -85,6 +87,7 @@ sources:
 
       - name: top_departments
         description: "Information of the Top Departments"
+        tags: ["golden"]
         columns: 
           - name: department_id
             data_type: INTEGER
