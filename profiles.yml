@@ -7,8 +7,7 @@ dbt_demo:
     dev:
       type: bigquery
       method: service-account
-      keyfile: service_account_elegant-tendril.json
-      project: elegant-tendril-362907
+      keyfile: service_account.json
       dataset: instacart
       threads: 2
 

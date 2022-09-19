@@ -12,4 +12,4 @@ SELECT
     t.*,
     t._file_name AS file_name,
     CURRENT_TIMESTAMP() AS load_time
-FROM {{ source('instacart_bronze', 'order_product') }} AS t
+FROM {{ source('bronze', 'order_product') }} AS t
